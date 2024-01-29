@@ -1,0 +1,43 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visualize Data</title>
+</head>
+<body>
+<h1>Visualize Data</h1>
+<div id="data-visualization"></div>
+
+<script>
+// Get the data from the server
+fetch('/get_data')
+.then(response => response.json())
+.then(data => {
+// Visualize the data
+const visualization = new Chart(document.getElementById('data-visualization'), {
+type: 'bar',
+data: {
+labels: data.map(row => row.name),
+datasets: [{
+label: 'Total Births',
+data: data.map(row => row.total_births)
+}]
+},
+options: {
+scales: {
+yAxes: [{
+ticks: {
+beginAtZero: true
+}
+}]
+}
+}
+});
+});
+</script>
+</body>
+</html>
+
